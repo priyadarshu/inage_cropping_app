@@ -2,23 +2,24 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_cropper_example/utils.dart';
-import 'package:image_cropper_example/widget/floating_button.dart';
-import 'package:image_cropper_example/widget/image_list_widget.dart';
 
-class CustomPage extends StatefulWidget {
+import 'package:inage_cropping_app/utils.dart';
+import 'package:inage_cropping_app/widget/floating_button.dart';
+import 'package:inage_cropping_app/widget/image_list_widget.dart';
+
+class SquarePage extends StatefulWidget {
   final bool isGallery;
 
-  const CustomPage({
+  const SquarePage({
     Key key,
     @required this.isGallery,
   }) : super(key: key);
 
   @override
-  _CustomPageState createState() => _CustomPageState();
+  _SquarePageState createState() => _SquarePageState();
 }
 
-class _CustomPageState extends State<CustomPage> {
+class _SquarePageState extends State<SquarePage> {
   List<File> imageFiles = [];
 
   @override
@@ -31,29 +32,33 @@ class _CustomPageState extends State<CustomPage> {
   Future onClickedButton() async {
     final file = await Utils.pickMedia(
       isGallery: widget.isGallery,
-      cropImage: cropCustomImage,
+      cropImage: cropSquareImage,
     );
 
     if (file == null) return;
     setState(() => imageFiles.add(file));
   }
 
-  static Future<File> cropCustomImage(File imageFile) async =>
+  Future<File> cropSquareImage(File imageFile) async =>
       await ImageCropper.cropImage(
-        aspectRatio: CropAspectRatio(ratioX: 16, ratioY: 9),
         sourcePath: imageFile.path,
-        androidUiSettings: androidUiSettings(),
-        iosUiSettings: iosUiSettings(),
+        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        aspectRatioPresets: [CropAspectRatioPreset.square],
+        compressQuality: 70,
+        compressFormat: ImageCompressFormat.jpg,
+        androidUiSettings: androidUiSettingsLocked(),
+        iosUiSettings: iosUiSettingsLocked(),
       );
 
-  static IOSUiSettings iosUiSettings() => IOSUiSettings(
-        aspectRatioLockEnabled: false,
+  IOSUiSettings iosUiSettingsLocked() => IOSUiSettings(
+        rotateClockwiseButtonHidden: false,
+        rotateButtonsHidden: false,
       );
 
-  static AndroidUiSettings androidUiSettings() => AndroidUiSettings(
+  AndroidUiSettings androidUiSettingsLocked() => AndroidUiSettings(
         toolbarTitle: 'Crop Image',
         toolbarColor: Colors.red,
         toolbarWidgetColor: Colors.white,
-        lockAspectRatio: false,
+        hideBottomControls: true,
       );
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_cropper_example/page/custom_page.dart';
-import 'package:image_cropper_example/page/predefined_page.dart';
-import 'package:image_cropper_example/page/square_page.dart';
+
+import 'package:inage_cropping_app/page/custom_page.dart';
+import 'package:inage_cropping_app/page/predefined_page.dart';
+import 'package:inage_cropping_app/page/square_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
