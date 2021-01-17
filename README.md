@@ -19,3 +19,4 @@ Steps followed in creating the app
     
 ```
 3. The coding part UI design
+4. Coding the logics
