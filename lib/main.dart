@@ -115,15 +115,15 @@ class _HomePageState extends State<HomePage>
       items: [
         BottomNavigationBarItem(
           icon: Text('Cropper', style: style),
-          title: Text('Square'),
+          label: 'Square',
         ),
         BottomNavigationBarItem(
           icon: Text('Cropper', style: style),
-          title: Text('Custom'),
+          label: 'Custom',
         ),
         BottomNavigationBarItem(
           icon: Text('Cropper', style: style),
-          title: Text('Predefined'),
+          label: 'Predefined',
         ),
       ],
       onTap: (int index) => setState(() => this.index = index),
